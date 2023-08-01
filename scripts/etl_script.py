@@ -46,7 +46,7 @@ class TaskManagement:
             response = requests.get(url, headers=headers)
             if response.ok:
                 return response.json()
-            print("Error in response: ", response, "Error message: ", response.text())
+            print("Error in response: ", response, "Error message: ", response.text)
             print(f"Error on Page: {kwargs.get('page')}")
         except Exception as e:
             print("Error in API call", str(e))

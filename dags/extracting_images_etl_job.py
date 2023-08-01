@@ -1,3 +1,4 @@
+import os
 import sys
 from datetime import datetime
 sys.path.append("/opt/airflow/scripts")
@@ -8,6 +9,7 @@ from airflow.models import Variable
 
 from etl_script import TaskManagement, load_into_db
 
+db_file = Variable.get("DB_FILE")
 total_records = int(Variable.get("TOTAL_RECORDS"))
 page_size = int(Variable.get("PAGE_SIZE"))
 req_in_task = int(Variable.get("REQUEST_IN_TASK"))
@@ -37,7 +39,8 @@ with DAG(
         This task is created to ingest the data into the DB.
         :return: None
         """
-        load_into_db("scripts/photos_db23.sqlite3", total_records)
+        
+        load_into_db(db_file, total_records)
 
     # Define the task that generates data and stores it in XCom
     def generate_data(query, **context):
