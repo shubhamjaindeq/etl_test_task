@@ -155,5 +155,7 @@ def load_into_db(db_file, number_of_records):
         if to_break:
             break
     print(counter, "rows entered")
+    if counter != number_of_records:
+        raise Exception(f"Unable to load {number_of_records} records")
     conn.commit()
     conn.close()
